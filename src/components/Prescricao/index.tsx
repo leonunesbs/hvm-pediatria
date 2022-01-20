@@ -170,7 +170,6 @@ export const Prescricao: React.FunctionComponent<any> = () => {
               )}
             </Tr>
             <Tr>
-              <Th></Th>
               <Th>
                 <HStack>
                   <Button

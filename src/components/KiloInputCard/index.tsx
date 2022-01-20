@@ -74,6 +74,7 @@ function KiloInputCard() {
               type="number"
               step={0.1}
               focusBorderColor="green.500"
+              autoFocus
               {...register('kilos')}
             />
             {errors?.kilos && (

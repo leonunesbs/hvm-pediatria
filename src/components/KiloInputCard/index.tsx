@@ -1,6 +1,7 @@
 import { MainContext } from '@/context/MainContext';
 import {
   Button,
+  Divider,
   Flex,
   FormControl,
   FormLabel,
@@ -62,10 +63,12 @@ function KiloInputCard() {
   );
 
   return (
-    <Card maxW="xl" mx="auto">
-      <Heading as="h1" mb={4}>
-        Hidratação venosa de manutenção
-      </Heading>
+    <Card maxW="xl" mx="auto" textAlign="center" mb={4}>
+      <Heading as="h1">Hidratação venosa de manutenção</Heading>
+      <Text as="em" fontSize="lg">
+        Holiday&amp;Segar
+      </Text>
+      <Divider my={4} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex align="flex-end">
           <FormControl>

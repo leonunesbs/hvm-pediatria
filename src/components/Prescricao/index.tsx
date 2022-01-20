@@ -1,5 +1,6 @@
 import { MainContext } from '@/context/MainContext';
 import {
+  Box,
   Button,
   Divider,
   FormControl,
@@ -22,7 +23,7 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Card } from '../Card';
 
 export const Prescricao: React.FunctionComponent<any> = () => {
@@ -31,6 +32,10 @@ export const Prescricao: React.FunctionComponent<any> = () => {
   const [KCl, setKCl] = useState(farmacia.KCl10);
   const [NaCl, setNaCl] = useState(farmacia.NaCl10);
   const [nEtapas, setNEtapas] = useState(4);
+
+  useEffect(() => {
+    nEtapas > 4 && setNEtapas(6);
+  }, [nEtapas]);
 
   const [vasao, setVasao] = useState('gotas/min');
   return (
@@ -45,28 +50,42 @@ export const Prescricao: React.FunctionComponent<any> = () => {
           <Slider
             defaultValue={4}
             min={1}
-            max={6}
+            max={5}
             step={1}
             onChange={(v) => setNEtapas(v)}
-            mb={10}
+            mb={16}
+            textAlign="center"
+            fontSize="xs"
           >
-            <SliderMark value={1} mt={4} fontSize="sm">
-              1
+            <SliderMark value={1} mt={4} ml="-5">
+              <Box>
+                <Text>1</Text>
+                <Text>24/24h</Text>
+              </Box>
             </SliderMark>
-            <SliderMark value={2} mt={4} ml="-1.5" fontSize="sm">
-              2
+            <SliderMark value={2} mt={4} ml="-5">
+              <Box>
+                <Text>2</Text>
+                <Text>12/12h</Text>
+              </Box>
             </SliderMark>
-            <SliderMark value={3} mt={4} ml="-1.5" fontSize="sm">
-              3
+            <SliderMark value={3} mt={4} ml="-3.5">
+              <Box>
+                <Text>3</Text>
+                <Text>8/8h</Text>
+              </Box>
             </SliderMark>
-            <SliderMark value={4} mt={4} ml="-1" fontSize="sm">
-              4
+            <SliderMark value={4} mt={4} ml="-3.5">
+              <Box>
+                <Text>4</Text>
+                <Text>6/6h</Text>
+              </Box>
             </SliderMark>
-            <SliderMark value={5} mt={4} ml="-1" fontSize="sm">
-              5
-            </SliderMark>
-            <SliderMark value={6} mt={4} ml="-1" fontSize="sm">
-              6
+            <SliderMark value={5} mt={4} ml="-3.5">
+              <Box>
+                <Text>6</Text>
+                <Text>4/4h</Text>
+              </Box>
             </SliderMark>
             <SliderTrack bg="green.100">
               <SliderFilledTrack bg="green.500" />

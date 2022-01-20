@@ -152,10 +152,9 @@ export const Prescricao: React.FunctionComponent<any> = () => {
               <Td>SG 5%</Td>
               <Td>
                 {formatFloat(
-                  (dmdH2OPorDia -
+                  dmdH2OPorDia / nEtapas -
                     (dmdEletrolitica.na / NaCl.mEq / nEtapas +
-                      dmdEletrolitica.k / KCl.mEq / nEtapas)) /
-                    nEtapas,
+                      dmdEletrolitica.k / KCl.mEq / nEtapas),
                 )}{' '}
                 mL
               </Td>
@@ -175,16 +174,7 @@ export const Prescricao: React.FunctionComponent<any> = () => {
           </Tbody>
           <Tfoot>
             <Tr>
-              <Th>
-                VT{' '}
-                {formatFloat(
-                  (dmdH2OPorDia -
-                    (dmdEletrolitica.k / KCl.mEq / nEtapas +
-                      dmdEletrolitica.na / NaCl.mEq / nEtapas)) /
-                    nEtapas,
-                )}{' '}
-                mL - EV
-              </Th>
+              <Th>VT {formatFloat(dmdH2OPorDia / nEtapas)} mL - EV</Th>
               {vasao === 'gotas/min' && (
                 <Th>{formatFloat((dmdH2OPorDia * 20) / 24 / 60)} gotas/min</Th>
               )}

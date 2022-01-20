@@ -56,15 +56,29 @@ Método 1
 
 Método 2
 
-| Peso          | Necessidade hídrica em 24 horas                               |
-| ------------- | ------------------------------------------------------------- |
-| < 10kg        | 100 mL/kg.                                                    |
-| > 10kg a 20kg | 1000mL (10kg) + 50mL/kg para cada kg > 10kg                   |
-| > 20kg a 80kg | 1500mL (20kg) + 20mL/kg para cada kg > 20kg (máx 2400mL/dia)  | 
+| Peso          | Necessidade hídrica em 24 horas                                   |
+| ------------- | ----------------------------------------------------------------- |
+| < 10kg        | 100 mL/kg/dia                                                     |
+| > 10kg a 20kg | 1000mL (10kg) + 50mL/kg/dia para cada kg > 10kg                   |
+| > 20kg a 80kg | 1500mL (20kg) + 20mL/kg/dia para cada kg > 20kg (máx 2400mL/dia)  | 
 
+### Eletrólitos
 
+| Peso          |     Íon       | Necessidade eletrolítica em 24 horas  |
+| ------------- | ------------- | ------------------------------------- |
+|               | Na+           | 2 mEq/100mL                    |
+| < 10kg        | Cl-           | 2 mEq/100mL                    |
+|               | K+            | 1 mEq/100mL                    |
+|               | Na+           | 2,5 mEq/100mL                  |
+| > 10kg a 20kg | Cl-           | 2,5 mEq/100mL                  |
+|               | K+            | 1,5 mEq/100mL                  |
+|               | Na+           | 1 mEq/100mL                    |
+| > 20kg a 80kg | Cl-           | 1,5 mEq/100mL                  | 
+|               | K+            | 2 mEq/100mL                    |
 
+A maioria das perdas eletrolícas ocorrem por via urinária. A manutenção da homeostase pode variar de dia para dia e de acordo com o quadro clínico.
 
+### Glicose
 
 
 

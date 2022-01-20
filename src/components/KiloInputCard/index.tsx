@@ -66,7 +66,7 @@ function KiloInputCard() {
     <Card maxW="xl" mx="auto" textAlign="center" mb={4}>
       <Heading as="h1">Hidratação venosa de manutenção</Heading>
       <Text as="em" fontSize="lg">
-        Holiday&amp;Segar
+        Holliday&amp;Segar
       </Text>
       <Divider my={4} />
       <form onSubmit={handleSubmit(onSubmit)}>

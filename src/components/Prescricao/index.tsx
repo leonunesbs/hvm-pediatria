@@ -47,6 +47,30 @@ export const Prescricao: React.FunctionComponent<any> = () => {
 
   const [vasao, setVasao] = useState('gotas/min');
 
+  const getVolumeDeGlicose05 = () => {
+    return (
+      dmdH2OPorDia / nEtapas -
+      (((NaCl.mEq != 0 && dmdEletrolitica.na / NaCl.mEq / nEtapas) || 0) +
+        ((KCl.mEq != 0 && dmdEletrolitica.k / KCl.mEq / nEtapas) || 0) +
+        ((Gluconato.mEq != 0 && dmdEletrolitica.ca / Gluconato.mEq / nEtapas) ||
+          0) +
+        ((MgSo4.mEq != 0 && dmdEletrolitica.mg / MgSo4.mEq / nEtapas) || 0))
+    );
+  };
+
+  const getNaClTV = () => {
+    return formatFloat(dmdEletrolitica.na / NaCl.mEq / nEtapas);
+  };
+  const getKClTV = () => {
+    return formatFloat(dmdEletrolitica.k / KCl.mEq / nEtapas);
+  };
+  const getGluconatoTV = () => {
+    return formatFloat(dmdEletrolitica.ca / Gluconato.mEq / nEtapas);
+  };
+  const getMagnesioTV = () => {
+    return formatFloat(dmdEletrolitica.mg / MgSo4.mEq / nEtapas);
+  };
+
   return (
     <Card maxW="3xl" mx="auto" w="100%">
       <Heading as="h2">Prescrição</Heading>
@@ -108,14 +132,14 @@ export const Prescricao: React.FunctionComponent<any> = () => {
               colorScheme={NaCl === farmacia.NaCl09 ? 'green' : 'gray'}
               onClick={() => setNaCl(farmacia.NaCl09)}
             >
-              {farmacia.KCl19.concentracao}
+              {farmacia.NaCl09.concentracao}
             </Button>
             <Button
               size="xs"
               colorScheme={NaCl === farmacia.NaCl10 ? 'green' : 'gray'}
               onClick={() => setNaCl(farmacia.NaCl10)}
             >
-              {farmacia.KCl19.concentracao}
+              {farmacia.NaCl10.concentracao}
             </Button>
             <Button
               size="xs"
@@ -208,32 +232,17 @@ export const Prescricao: React.FunctionComponent<any> = () => {
             <Tr>
               <Td>SG 5%</Td>
               <Td>
-                {formatFloat(
-                  dmdH2OPorDia / nEtapas -
-                    (((NaCl.mEq != 0 &&
-                      dmdEletrolitica.na / NaCl.mEq / nEtapas) ||
-                      0) +
-                      ((KCl.mEq != 0 &&
-                        dmdEletrolitica.k / KCl.mEq / nEtapas) ||
-                        0) +
-                      ((Gluconato.mEq != 0 &&
-                        dmdEletrolitica.ca / Gluconato.mEq / nEtapas) ||
-                        0) +
-                      ((MgSo4.mEq != 0 &&
-                        dmdEletrolitica.mg / MgSo4.mEq / nEtapas) ||
-                        0)),
-                )}{' '}
-                mL
+                {formatFloat(getVolumeDeGlicose05())} mL (
+                {formatFloat(getVolumeDeGlicose05() * farmacia.Glicose05.mEq)}{' '}
+                g)
               </Td>
             </Tr>
             {NaCl.mEq != 0 && (
               <Tr>
                 <Td>
-                  {NaCl.formula} {NaCl.concentracao}
+                  {NaCl.nome} {NaCl.concentracao}
                 </Td>
-                <Td>
-                  {formatFloat(dmdEletrolitica.na / NaCl.mEq / nEtapas)} mL
-                </Td>
+                <Td>{getNaClTV()} mL</Td>
               </Tr>
             )}
             {KCl.mEq != 0 && (
@@ -241,7 +250,7 @@ export const Prescricao: React.FunctionComponent<any> = () => {
                 <Td>
                   {KCl.formula} {KCl.concentracao}
                 </Td>
-                <Td>{formatFloat(dmdEletrolitica.k / KCl.mEq / nEtapas)} mL</Td>
+                <Td>{getKClTV()} mL</Td>
               </Tr>
             )}
             {Gluconato.mEq != 0 && (
@@ -249,19 +258,15 @@ export const Prescricao: React.FunctionComponent<any> = () => {
                 <Td>
                   {Gluconato.nome} {Gluconato.concentracao}
                 </Td>
-                <Td>
-                  {formatFloat(dmdEletrolitica.ca / Gluconato.mEq / nEtapas)} mL
-                </Td>
+                <Td>{getGluconatoTV()} mL</Td>
               </Tr>
             )}
             {MgSo4.mEq != 0 && (
               <Tr>
                 <Td>
-                  {MgSo4.formula} {MgSo4.concentracao}
+                  {MgSo4.nome} {MgSo4.concentracao}
                 </Td>
-                <Td>
-                  {formatFloat(dmdEletrolitica.mg / MgSo4.mEq / nEtapas)} mL
-                </Td>
+                <Td>{getMagnesioTV()} mL</Td>
               </Tr>
             )}
           </Tbody>

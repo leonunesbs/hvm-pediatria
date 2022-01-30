@@ -21,15 +21,15 @@ export const DemandaHidrica = () => {
       <strong>Em 1 hora:</strong>
       <StatGroup>
         <Stat px={4} m={2} rounded={{ md: 'lg' }} shadow="base">
-          <StatNumber>{((dmdH2OPorHora * 20) / 60).toFixed(0)}</StatNumber>
+          <StatNumber>{formatFloat((dmdH2OPorHora * 20) / 60)}</StatNumber>
           <StatHelpText>gotas/min</StatHelpText>
         </Stat>
         <Stat px={4} m={2} rounded={{ md: 'lg' }} shadow="base">
-          <StatNumber>{((dmdH2OPorHora * 60) / 60).toFixed(0)}</StatNumber>
+          <StatNumber>{formatFloat((dmdH2OPorHora * 60) / 60)}</StatNumber>
           <StatHelpText>microgotas/min</StatHelpText>
         </Stat>
         <Stat px={4} m={2} rounded={{ md: 'lg' }} shadow="base">
-          <StatNumber>{dmdH2OPorHora}</StatNumber>
+          <StatNumber>{formatFloat(dmdH2OPorHora)}</StatNumber>
           <StatHelpText>mL/hora</StatHelpText>
         </Stat>
       </StatGroup>
@@ -39,7 +39,7 @@ export const DemandaHidrica = () => {
       <StatGroup>
         <Stat px={4} m={2} rounded={{ md: 'lg' }} shadow="base">
           <StatLabel>Total 24h</StatLabel>
-          <StatNumber>{dmdH2OPorDia}</StatNumber>
+          <StatNumber>{formatFloat(dmdH2OPorDia)}</StatNumber>
           <StatHelpText>mL/dia</StatHelpText>
         </Stat>
         <Stat px={4} m={2} rounded={{ md: 'lg' }} shadow="base">

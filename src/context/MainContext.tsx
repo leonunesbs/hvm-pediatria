@@ -1,6 +1,7 @@
 import { createContext, useCallback, useMemo, useState } from 'react';
 
 type Eletrolitos = {
+  glicose: number;
   k: number;
   na: number;
   cl: number;
@@ -16,6 +17,9 @@ type FarmaciaType = {
 };
 
 interface Farmacia {
+  Glicose05: FarmaciaType;
+  Glicose25: FarmaciaType;
+  Glicose50: FarmaciaType;
   KCl10: FarmaciaType;
   KCl19: FarmaciaType;
   NaCl09: FarmaciaType;
@@ -48,6 +52,7 @@ export function MainProvider({ children }: MainProviderProps) {
   const [dmdH2OPorHora, setDmdH2OPorHora] = useState(0);
   const [dmdH2OPorDia, setDmdH2OPorDia] = useState(0);
   const [dmdEletrolitica, setDmdEletrolitica] = useState<Eletrolitos>({
+    glicose: 0,
     k: 0,
     na: 0,
     cl: 0,
@@ -72,6 +77,36 @@ export function MainProvider({ children }: MainProviderProps) {
   );
   const farmacia = useMemo<Farmacia>(() => {
     return {
+      Glicose05: {
+        formula: (
+          <span>
+            C<sub>6</sub>H<sub>12</sub>o<sub>6</sub>
+          </span>
+        ),
+        nome: 'Glicose',
+        concentracao: '5%',
+        mEq: 0.05,
+      },
+      Glicose25: {
+        formula: (
+          <span>
+            C<sub>6</sub>H<sub>12</sub>o<sub>6</sub>
+          </span>
+        ),
+        nome: 'Glicose',
+        concentracao: '25%',
+        mEq: 0.25,
+      },
+      Glicose50: {
+        formula: (
+          <span>
+            C<sub>6</sub>H<sub>12</sub>o<sub>6</sub>
+          </span>
+        ),
+        nome: 'Glicose',
+        concentracao: '50%',
+        mEq: 0.5,
+      },
       KCl10: {
         formula: <p>KCl</p>,
         nome: 'Cloreto de potássio',
@@ -130,16 +165,16 @@ export function MainProvider({ children }: MainProviderProps) {
       if (categoria) {
         const demanda = [
           () => {
-            setDmdH2OPorHora((kilos * 150) / 24);
-            setDmdH2OPorDia(kilos * 150);
+            setDmdH2OPorHora((kilos * 100) / 24);
+            setDmdH2OPorDia(kilos * 100);
           },
           () => {
-            setDmdH2OPorHora((kilos * 150) / 24);
-            setDmdH2OPorDia(kilos * 150);
+            setDmdH2OPorHora((kilos * 100) / 24);
+            setDmdH2OPorDia(kilos * 100);
           },
           () => {
-            setDmdH2OPorHora((kilos * 150) / 24);
-            setDmdH2OPorDia(kilos * 150);
+            setDmdH2OPorHora((kilos * 100) / 24);
+            setDmdH2OPorDia(kilos * 100);
           },
           () => {
             setDmdH2OPorHora(kilos * 4);
@@ -166,9 +201,9 @@ export function MainProvider({ children }: MainProviderProps) {
   const setDemandaEletrolitica = useCallback(
     (categoria, kilos): void => {
       const calcularDemandaHidricaPorCategoria = (kilos: number) => [
-        kilos * 150,
-        kilos * 150,
-        kilos * 150,
+        kilos * 100,
+        kilos * 100,
+        kilos * 100,
         kilos * 100,
         1000 + 50 * (kilos - 10),
         1500 + 20 * (kilos - 20) > 2400 ? 2400 : 1500 + 20 * (kilos - 20),
@@ -177,20 +212,21 @@ export function MainProvider({ children }: MainProviderProps) {
       const demanda = [
         () => {
           setDmdEletrolitica({
+            glicose: 4 * kilos * 60 * 24,
             k:
-              0 *
+              1 *
               (calcularDemandaHidricaPorCategoria(kilos)[
                 categoriasPonderais.indexOf(categoria)
               ] /
                 100),
             na:
-              0 *
+              2 *
               (calcularDemandaHidricaPorCategoria(kilos)[
                 categoriasPonderais.indexOf(categoria)
               ] /
                 100),
             cl:
-              0 *
+              2 *
               (calcularDemandaHidricaPorCategoria(kilos)[
                 categoriasPonderais.indexOf(categoria)
               ] /
@@ -211,40 +247,7 @@ export function MainProvider({ children }: MainProviderProps) {
         },
         () => {
           setDmdEletrolitica({
-            k:
-              0 *
-              (calcularDemandaHidricaPorCategoria(kilos)[
-                categoriasPonderais.indexOf(categoria)
-              ] /
-                100),
-            na:
-              0 *
-              (calcularDemandaHidricaPorCategoria(kilos)[
-                categoriasPonderais.indexOf(categoria)
-              ] /
-                100),
-            cl:
-              0 *
-              (calcularDemandaHidricaPorCategoria(kilos)[
-                categoriasPonderais.indexOf(categoria)
-              ] /
-                100),
-            ca:
-              3 *
-              (calcularDemandaHidricaPorCategoria(kilos)[
-                categoriasPonderais.indexOf(categoria)
-              ] /
-                100),
-            mg:
-              0.4 *
-              (calcularDemandaHidricaPorCategoria(kilos)[
-                categoriasPonderais.indexOf(categoria)
-              ] /
-                100),
-          });
-        },
-        () => {
-          setDmdEletrolitica({
+            glicose: 4 * kilos * 60 * 24,
             k:
               1 *
               (calcularDemandaHidricaPorCategoria(kilos)[
@@ -264,13 +267,13 @@ export function MainProvider({ children }: MainProviderProps) {
               ] /
                 100),
             ca:
-              4 *
+              2 *
               (calcularDemandaHidricaPorCategoria(kilos)[
                 categoriasPonderais.indexOf(categoria)
               ] /
                 100),
             mg:
-              0.5 *
+              0.3 *
               (calcularDemandaHidricaPorCategoria(kilos)[
                 categoriasPonderais.indexOf(categoria)
               ] /
@@ -279,6 +282,7 @@ export function MainProvider({ children }: MainProviderProps) {
         },
         () => {
           setDmdEletrolitica({
+            glicose: 4 * kilos * 60 * 24,
             k:
               1 *
               (calcularDemandaHidricaPorCategoria(kilos)[
@@ -297,22 +301,38 @@ export function MainProvider({ children }: MainProviderProps) {
                 categoriasPonderais.indexOf(categoria)
               ] /
                 100),
-            ca:
-              4 *
-              (calcularDemandaHidricaPorCategoria(kilos)[
-                categoriasPonderais.indexOf(categoria)
-              ] /
-                100),
-            mg:
-              0.5 *
-              (calcularDemandaHidricaPorCategoria(kilos)[
-                categoriasPonderais.indexOf(categoria)
-              ] /
-                100),
+            ca: 2 * kilos,
+            mg: 0.3 * kilos,
           });
         },
         () => {
           setDmdEletrolitica({
+            glicose: 5 * kilos * 60 * 24,
+            k:
+              1 *
+              (calcularDemandaHidricaPorCategoria(kilos)[
+                categoriasPonderais.indexOf(categoria)
+              ] /
+                100),
+            na:
+              2 *
+              (calcularDemandaHidricaPorCategoria(kilos)[
+                categoriasPonderais.indexOf(categoria)
+              ] /
+                100),
+            cl:
+              2 *
+              (calcularDemandaHidricaPorCategoria(kilos)[
+                categoriasPonderais.indexOf(categoria)
+              ] /
+                100),
+            ca: 4 * kilos,
+            mg: 0.5 * kilos,
+          });
+        },
+        () => {
+          setDmdEletrolitica({
+            glicose: 6 * kilos * 60 * 24,
             k:
               2 *
               (calcularDemandaHidricaPorCategoria(kilos)[
@@ -331,22 +351,13 @@ export function MainProvider({ children }: MainProviderProps) {
                 categoriasPonderais.indexOf(categoria)
               ] /
                 100),
-            ca:
-              3 *
-              (calcularDemandaHidricaPorCategoria(kilos)[
-                categoriasPonderais.indexOf(categoria)
-              ] /
-                100),
-            mg:
-              0.5 *
-              (calcularDemandaHidricaPorCategoria(kilos)[
-                categoriasPonderais.indexOf(categoria)
-              ] /
-                100),
+            ca: 4 * kilos,
+            mg: 0.5 * kilos,
           });
         },
         () => {
           setDmdEletrolitica({
+            glicose: 6 * kilos * 60 * 24,
             k:
               2 *
               (calcularDemandaHidricaPorCategoria(kilos)[
@@ -365,18 +376,8 @@ export function MainProvider({ children }: MainProviderProps) {
                 categoriasPonderais.indexOf(categoria)
               ] /
                 100),
-            ca:
-              3 *
-              (calcularDemandaHidricaPorCategoria(kilos)[
-                categoriasPonderais.indexOf(categoria)
-              ] /
-                100),
-            mg:
-              0.5 *
-              (calcularDemandaHidricaPorCategoria(kilos)[
-                categoriasPonderais.indexOf(categoria)
-              ] /
-                100),
+            ca: 4 * kilos,
+            mg: 0.5 * kilos,
           });
         },
       ];

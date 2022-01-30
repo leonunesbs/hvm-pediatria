@@ -32,7 +32,7 @@ const resolver: Resolver<FormValues> = async (values) => {
 };
 
 function KiloInputCard() {
-  const { categorias, setDemandaHidrica, setDemandaEletrolitica } =
+  const { categoriasPonderais, setDemandaHidrica, setDemandaEletrolitica } =
     useContext(MainContext);
   const {
     register,
@@ -43,23 +43,23 @@ function KiloInputCard() {
 
   const onSubmit: SubmitHandler<FormValues> = useCallback(
     (data) => {
-      if (data.kilos < 3.5 || data.kilos > 80) {
+      if (data.kilos > 80) {
         setError('kilos', {
           type: 'min',
-          message: 'Insira um número entre 3.5 e 80',
+          message: 'Insira um número menor que 80',
         });
         return;
       }
 
       const peso = data.kilos;
-      const categoria = categorias.find(
+      const categoria = categoriasPonderais.find(
         ([min, max]) => peso >= min && peso <= max,
       );
 
-      setDemandaHidrica(categoria, data);
-      setDemandaEletrolitica(categoria, data);
+      setDemandaHidrica(categoria, data.kilos);
+      setDemandaEletrolitica(categoria, data.kilos);
     },
-    [categorias, setDemandaEletrolitica, setDemandaHidrica, setError],
+    [categoriasPonderais, setDemandaEletrolitica, setDemandaHidrica, setError],
   );
 
   return (
@@ -75,7 +75,7 @@ function KiloInputCard() {
             <FormLabel textAlign="center">Insira o peso (kg):</FormLabel>
             <Input
               type="number"
-              step={0.1}
+              step={0.001}
               focusBorderColor="green.500"
               autoFocus
               {...register('kilos')}

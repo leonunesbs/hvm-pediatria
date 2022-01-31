@@ -315,7 +315,7 @@ export function MainProvider({ children }: MainProviderProps) {
         },
         () => {
           setDmdEletrolitica({
-            glicose: 5 * kilos * 60 * 24,
+            glicose: 3 * kilos * 60 * 24,
             k:
               1 *
               (calcularDemandaHidricaPorCategoria(kilos)[
@@ -340,7 +340,7 @@ export function MainProvider({ children }: MainProviderProps) {
         },
         () => {
           setDmdEletrolitica({
-            glicose: 6 * kilos * 60 * 24,
+            glicose: 3 * kilos * 60 * 24,
             k:
               2 *
               (calcularDemandaHidricaPorCategoria(kilos)[
@@ -365,7 +365,7 @@ export function MainProvider({ children }: MainProviderProps) {
         },
         () => {
           setDmdEletrolitica({
-            glicose: 4 * kilos * 60 * 24,
+            glicose: 2.5 * kilos * 60 * 24,
             k:
               2 *
               (calcularDemandaHidricaPorCategoria(kilos)[
@@ -390,7 +390,7 @@ export function MainProvider({ children }: MainProviderProps) {
         },
         () => {
           setDmdEletrolitica({
-            glicose: 4 * kilos * 60 * 24,
+            glicose: 2.5 * kilos * 60 * 24,
             k:
               2 *
               (calcularDemandaHidricaPorCategoria(kilos)[

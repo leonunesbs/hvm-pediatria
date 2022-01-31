@@ -1,6 +1,6 @@
 import { createContext, useCallback, useMemo, useState } from 'react';
 
-type Eletrolitos = {
+export type Eletrolitos = {
   glicose: number;
   k: number;
   na: number;
@@ -9,7 +9,7 @@ type Eletrolitos = {
   mg: number;
 };
 
-type FarmaciaType = {
+export type EletrolitoData = {
   formula: JSX.Element;
   nome: string;
   concentracao: string;
@@ -17,16 +17,16 @@ type FarmaciaType = {
 };
 
 interface Farmacia {
-  Glicose05: FarmaciaType;
-  Glicose25: FarmaciaType;
-  Glicose50: FarmaciaType;
-  KCl10: FarmaciaType;
-  KCl19: FarmaciaType;
-  NaCl09: FarmaciaType;
-  NaCl10: FarmaciaType;
-  NaCl20: FarmaciaType;
-  Gluconato10: FarmaciaType;
-  MgSo410: FarmaciaType;
+  Glicose05: EletrolitoData;
+  Glicose25: EletrolitoData;
+  Glicose50: EletrolitoData;
+  KCl10: EletrolitoData;
+  KCl19: EletrolitoData;
+  NaCl09: EletrolitoData;
+  NaCl10: EletrolitoData;
+  NaCl20: EletrolitoData;
+  Gluconato10: EletrolitoData;
+  MgSo410: EletrolitoData;
 }
 interface MainContextProps {
   formatFloat: (value: number) => string;
@@ -357,7 +357,7 @@ export function MainProvider({ children }: MainProviderProps) {
         },
         () => {
           setDmdEletrolitica({
-            glicose: 6 * kilos * 60 * 24,
+            glicose: 4 * kilos * 60 * 24,
             k:
               2 *
               (calcularDemandaHidricaPorCategoria(kilos)[

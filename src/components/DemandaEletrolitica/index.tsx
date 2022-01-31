@@ -21,6 +21,11 @@ export const DemandaEletrolitica = () => {
       <strong>Em 24 horas:</strong>
       <StatGroup textAlign="center">
         <Stat px={4} m={2} rounded={{ md: 'lg' }} shadow="base">
+          <StatLabel>Glicose</StatLabel>
+          <StatNumber>{formatFloat(dmdEletrolitica.glicose / 1000)}</StatNumber>
+          <StatHelpText>g/dia</StatHelpText>
+        </Stat>
+        <Stat px={4} m={2} rounded={{ md: 'lg' }} shadow="base">
           <StatLabel>Na+</StatLabel>
           <StatNumber>{formatFloat(dmdEletrolitica.na)}</StatNumber>
           <StatHelpText>mEq/dia</StatHelpText>

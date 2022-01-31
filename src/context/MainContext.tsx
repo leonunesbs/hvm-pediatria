@@ -71,7 +71,8 @@ export function MainProvider({ children }: MainProviderProps) {
       [2.0, 3.5],
       [3.5, 10],
       [10.0, 20.0],
-      [20.0, 80.0],
+      [20.0, 50.0],
+      [50.0, 80.0],
     ],
     [],
   );
@@ -145,7 +146,7 @@ export function MainProvider({ children }: MainProviderProps) {
         ),
         nome: 'Gluconato de cácio',
         concentracao: '10%',
-        mEq: 0.46,
+        mEq: 1,
       },
       MgSo410: {
         formula: (
@@ -190,6 +191,12 @@ export function MainProvider({ children }: MainProviderProps) {
               1500 + 20 * (kilos - 20) > 2400 ? 2400 : 1500 + 20 * (kilos - 20),
             );
           },
+          () => {
+            setDmdH2OPorHora(60 + 1 * (kilos - 20));
+            setDmdH2OPorDia(
+              1500 + 20 * (kilos - 20) > 2400 ? 2400 : 1500 + 20 * (kilos - 20),
+            );
+          },
         ];
 
         return demanda[categoriasPonderais.indexOf(categoria)]();
@@ -206,6 +213,7 @@ export function MainProvider({ children }: MainProviderProps) {
         kilos * 100,
         kilos * 100,
         1000 + 50 * (kilos - 10),
+        1500 + 20 * (kilos - 20) > 2400 ? 2400 : 1500 + 20 * (kilos - 20),
         1500 + 20 * (kilos - 20) > 2400 ? 2400 : 1500 + 20 * (kilos - 20),
       ];
 
@@ -326,8 +334,8 @@ export function MainProvider({ children }: MainProviderProps) {
                 categoriasPonderais.indexOf(categoria)
               ] /
                 100),
-            ca: 4 * kilos,
-            mg: 0.5 * kilos,
+            ca: 0.5 * kilos,
+            mg: 0.3 * kilos,
           });
         },
         () => {
@@ -351,8 +359,8 @@ export function MainProvider({ children }: MainProviderProps) {
                 categoriasPonderais.indexOf(categoria)
               ] /
                 100),
-            ca: 4 * kilos,
-            mg: 0.5 * kilos,
+            ca: 0.5 * kilos,
+            mg: 0.3 * kilos,
           });
         },
         () => {
@@ -376,8 +384,33 @@ export function MainProvider({ children }: MainProviderProps) {
                 categoriasPonderais.indexOf(categoria)
               ] /
                 100),
-            ca: 4 * kilos,
-            mg: 0.5 * kilos,
+            ca: 0.5 * kilos,
+            mg: 0.3 * kilos,
+          });
+        },
+        () => {
+          setDmdEletrolitica({
+            glicose: 4 * kilos * 60 * 24,
+            k:
+              2 *
+              (calcularDemandaHidricaPorCategoria(kilos)[
+                categoriasPonderais.indexOf(categoria)
+              ] /
+                100),
+            na:
+              3 *
+              (calcularDemandaHidricaPorCategoria(kilos)[
+                categoriasPonderais.indexOf(categoria)
+              ] /
+                100),
+            cl:
+              3 *
+              (calcularDemandaHidricaPorCategoria(kilos)[
+                categoriasPonderais.indexOf(categoria)
+              ] /
+                100),
+            ca: 10 * kilos,
+            mg: 10 * kilos,
           });
         },
       ];

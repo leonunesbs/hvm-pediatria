@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Card } from '../Card';
 import { CloretoPotassio } from './CloretoPotassio';
 import { EtapasSlider } from './EtapasSlider';
-import { Glicose } from './Glicose';
 import { GluconatoCalcio } from './GluconatoCalcio';
 import { CloretoSodio } from './NaCl';
 import PrescricaoTable from './PrescricaoTable';
@@ -20,7 +19,7 @@ export const Prescricao: React.FunctionComponent<any> = () => {
   const [kCl, setKCl] = useState(nulo);
   const [naCl, setNaCl] = useState(nulo);
   const [gluconato, setGluconato] = useState(nulo);
-  const [glicose, setGlicose] = useState(nulo);
+  const [glicose] = useState(nulo);
   const [mgSo4, setMgSo4] = useState(nulo);
   const [nEtapas, setNEtapas] = useState(4);
 
@@ -34,7 +33,6 @@ export const Prescricao: React.FunctionComponent<any> = () => {
       <Divider mb={4} />
       <Stack mb={4}>
         <EtapasSlider setNEtapas={setNEtapas} />
-        {/* <Glicose Glicose={glicose} setGlicose={setGlicose} /> */}
         <CloretoSodio NaCl={naCl} setNaCl={setNaCl} />
         <CloretoPotassio KCl={kCl} setKCl={setKCl} />
         <GluconatoCalcio Gluconato={gluconato} setGluconato={setGluconato} />

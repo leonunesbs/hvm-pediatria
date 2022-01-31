@@ -1,5 +1,6 @@
 import { MainContext } from '@/context/MainContext';
 import {
+  Box,
   Button,
   Divider,
   Flex,
@@ -9,7 +10,7 @@ import {
   Input,
   Text,
 } from '@chakra-ui/react';
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { Resolver, SubmitHandler, useForm } from 'react-hook-form';
 import { Card } from '../Card';
 
@@ -41,6 +42,8 @@ function KiloInputCard() {
     formState: { errors },
   } = useForm<FormValues>({ resolver });
 
+  const [categoria, setCategoria] = useState<any>();
+
   const onSubmit: SubmitHandler<FormValues> = useCallback(
     (data) => {
       if (data.kilos > 80) {
@@ -52,9 +55,12 @@ function KiloInputCard() {
       }
 
       const peso = data.kilos;
+
       const categoria = categoriasPonderais.find(
         ([min, max]) => peso >= min && peso <= max,
       );
+
+      setCategoria(categoria);
 
       setDemandaHidrica(categoria, data.kilos);
       setDemandaEletrolitica(categoria, data.kilos);
@@ -91,6 +97,25 @@ function KiloInputCard() {
           </Button>
         </Flex>
       </form>
+      <Box mt={6}>
+        <Text>
+          Categoria de peso: {categoria?.[0] || '-'} - {categoria?.[1] || '-'}{' '}
+          kg
+        </Text>
+        <Text>
+          {categoriasPonderais.indexOf(categoria) >= 0 &&
+            categoriasPonderais.indexOf(categoria) < 3 && (
+              <Text>Parâmetros: RN</Text>
+            )}
+          {categoriasPonderais.indexOf(categoria) >= 3 &&
+            categoriasPonderais.indexOf(categoria) < 6 && (
+              <Text>Parâmetros: Criança</Text>
+            )}
+          {categoriasPonderais.indexOf(categoria) >= 6 && (
+            <Text>Parâmetros: Criança/Adolescente</Text>
+          )}
+        </Text>
+      </Box>
     </Card>
   );
 }

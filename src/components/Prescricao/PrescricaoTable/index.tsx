@@ -55,7 +55,7 @@ function PrescricaoTable({
     );
   };
 
-  const tableValues = {
+  const components = {
     NaCl: formatFloat(dmdEletrolitica.na / naCl.mEq / nEtapas),
     KCl: formatFloat(dmdEletrolitica.k / kCl.mEq / nEtapas),
     Gluconato: formatFloat(dmdEletrolitica.ca / gluconato.mEq / nEtapas),
@@ -102,7 +102,7 @@ function PrescricaoTable({
               {naCl.nome} {naCl.concentracao}
             </Td>
             <Td>
-              {tableValues.NaCl} mL{' '}
+              {components.NaCl} mL{' '}
               <em>
                 ({formatFloat(dmdEletrolitica.na / nEtapas)}
                 mEq)
@@ -116,7 +116,7 @@ function PrescricaoTable({
               {kCl.formula} {kCl.concentracao}
             </Td>
             <Td>
-              {tableValues.KCl} mL{' '}
+              {components.KCl} mL{' '}
               <em>
                 ({formatFloat(dmdEletrolitica.k / nEtapas)}
                 mEq)
@@ -130,7 +130,7 @@ function PrescricaoTable({
               {gluconato.nome} {gluconato.concentracao}
             </Td>
             <Td>
-              {tableValues.Gluconato} mL{' '}
+              {components.Gluconato} mL{' '}
               <em>
                 ({formatFloat(dmdEletrolitica.ca / nEtapas)}
                 mEq)
@@ -144,7 +144,7 @@ function PrescricaoTable({
               {mgSo4.nome} {mgSo4.concentracao}
             </Td>
             <Td>
-              {tableValues.MgSO4} mL{' '}
+              {components.MgSO4} mL{' '}
               <em>
                 ({formatFloat(dmdEletrolitica.mg / nEtapas)}
                 mEq)
